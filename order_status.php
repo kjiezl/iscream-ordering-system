@@ -19,9 +19,15 @@ $order_query = mysqli_query($conn, "SELECT * FROM `orders` WHERE user_id = '$use
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Status</title>
     <link rel="stylesheet" href="css/order_status.css">
+    <link rel="icon" href="images/logo.png" type="image/png">
 </head>
 <body>
-
+    <header>
+        <div class="logo-container">
+            <img src="images/logo.png" alt="iScream Shop Logo" class="logo">
+            <h1 class="site-name">iScream Shop</h1>
+        </div>
+    </header>
     <div class="container">
         <h1>Your Order Status</h1>
 
@@ -41,7 +47,7 @@ $order_query = mysqli_query($conn, "SELECT * FROM `orders` WHERE user_id = '$use
                         echo "
                         <tr>
                             <td>{$order['id']}</td>
-                            <td>\${$order['total_price']}</td>
+                            <td>₱{$order['total_price']}</td>
                             <td>{$order['status']}</td>
                             <td><a href='view_order.php?id={$order['id']}' class='btn'>View Details</a></td>
                         </tr>";

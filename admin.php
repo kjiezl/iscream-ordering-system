@@ -62,7 +62,7 @@ if (isset($_GET['logout'])) {
                             <tr>
                                 <td>{$product['id']}</td>
                                 <td>{$product['name']}</td>
-                                <td>\${$product['price']}</td>
+                                <td>₱{$product['price']}</td>
                                 <td><img src='images/{$product['image']}' height='50'></td>
                                 <td>
                                     <a href='edit_product.php?id={$product['id']}' class='btn'>Edit</a>
@@ -99,7 +99,7 @@ if (isset($_GET['logout'])) {
                             <tr>
                                 <td>{$order['id']}</td>
                                 <td>{$order['user_id']}</td>
-                                <td>\${$order['total_price']}</td>
+                                <td>₱{$order['total_price']}</td>
                                 <td>{$order['status']}</td>
                                 <td>
                                     <form method='post' action='update_order_status.php'>

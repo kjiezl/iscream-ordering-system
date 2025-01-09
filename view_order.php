@@ -29,15 +29,21 @@ if (!$order) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Details</title>
     <link rel="stylesheet" href="css/view_order.css">
+    <link rel="icon" href="images/logo.png" type="image/png">
 </head>
 <body>
-
+    <header>
+        <div class="logo-container">
+            <img src="images/logo.png" alt="iScream Shop Logo" class="logo">
+            <h1 class="site-name">iScream Shop</h1>
+        </div>
+    </header>
     <div class="container">
         <h1>Order Details</h1>
 
         <div class="order-details">
             <p><strong>Order ID:</strong> <?php echo $order['id']; ?></p>
-            <p><strong>Total Price:</strong> $<?php echo $order['total_price']; ?></p>
+            <p><strong>Total Price:</strong> ₱<?php echo $order['total_price']; ?></p>
             <p><strong>Status:</strong> <?php echo $order['status']; ?></p>
         </div>
 
@@ -58,9 +64,9 @@ if (!$order) {
                         echo "
                         <tr>
                             <td>{$item['product_name']}</td>
-                            <td>\${$item['price']}</td>
+                            <td>₱{$item['price']}</td>
                             <td>{$item['quantity']}</td>
-                            <td>\${$item['total_price']}</td>
+                            <td>₱{$item['total_price']}</td>
                         </tr>";
                     }
                 }

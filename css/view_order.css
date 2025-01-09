@@ -2,13 +2,43 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f4f4f4;
+    background-color: #fcd6ec;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+}
+
+header {
+    position: absolute; 
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px 20px;
+    background-color: none;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+ }
+
+.logo-container {
+   display: flex;
+   align-items: center;
+}
+
+.logo-container .logo {
+   width: 75px;
+   height: auto;
+   margin-right: 10px;
+}
+
+.logo-container .site-name {
+   font-size: 20px;
+   font-weight: bold;
+   color: #333;
+   margin: 0;
 }
 
 .container {
@@ -24,7 +54,7 @@ h1, h2 {
     font-size: 2rem;
     color: #333;
     margin-bottom: 20px;
-    margin-top: -50px;
+    margin-top: 0px;
 }
 
 h2 {
