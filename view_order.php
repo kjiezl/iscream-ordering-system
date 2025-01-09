@@ -11,8 +11,10 @@ if (!isset($user_id)) {
 
 $order_id = $_GET['id'];
 
-$order_query = mysqli_query($conn, "SELECT * FROM `orders` WHERE user_id = '$user_id' AND id = '$order_id'") or die('Query Failed');
+$order_query = mysqli_query($conn, "SELECT * FROM `orders` WHERE user_id = '$user_id' AND id = '$order_id'") or die('Query Failed: No orders found.');
 $order = mysqli_fetch_assoc($order_query);
+
+$order_items_query = mysqli_query($conn, "SELECT * FROM `order_items` WHERE order_id = '$order_id'") or die('Query Failed: No order items found.');
 
 if (!$order) {
     echo "<script>alert('Order not found!'); window.location.href='order_status.php';</script>";
@@ -26,86 +28,7 @@ if (!$order) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Details</title>
-    <link rel="stylesheet" href="css/style.css">
-    <style>
-        /* General Body Styling */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        /* Main Container */
-        .container {
-            width: 80%;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 2rem;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        /* Order Details Section */
-        .order-details {
-            margin-bottom: 20px;
-        }
-
-        .order-details p {
-            font-size: 1.2rem;
-            color: #555;
-            margin: 5px 0;
-        }
-
-        /* Items Table Styling */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #333;
-            color: #fff;
-            font-weight: bold;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        /* Action Button Styling */
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
-            font-size: 16px;
-        }
-
-        .btn:hover {
-            background-color: #218838;
-        }
-    </style>
+    <link rel="stylesheet" href="css/view_order.css">
 </head>
 <body>
 
@@ -125,18 +48,21 @@ if (!$order) {
                     <th>Product Name</th>
                     <th>Price</th>
                     <th>Quantity</th>
+                    <th>Total Price</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $cart_query = mysqli_query($conn, "SELECT * FROM `cart` WHERE user_id = '$user_id' AND order_id = '{$order['id']}'") or die('Query Failed');
-                while ($item = mysqli_fetch_assoc($cart_query)) {
-                    echo "
-                    <tr>
-                        <td>{$item['name']}</td>
-                        <td>\${$item['price']}</td>
-                        <td>{$item['quantity']}</td>
-                    </tr>";
+                if (mysqli_num_rows($order_items_query) > 0) {
+                    while ($item = mysqli_fetch_assoc($order_items_query)) {
+                        echo "
+                        <tr>
+                            <td>{$item['product_name']}</td>
+                            <td>\${$item['price']}</td>
+                            <td>{$item['quantity']}</td>
+                            <td>\${$item['total_price']}</td>
+                        </tr>";
+                    }
                 }
                 ?>
             </tbody>
