@@ -8,6 +8,14 @@ if(!isset($user_id)){
    header('location:login.php');
 };
 
+$query = mysqli_query($conn, "SELECT is_admin FROM user_info WHERE id = '$user_id'") or die('Query Failed');
+$user = mysqli_fetch_assoc($query);
+
+if ($user['is_admin'] == 1) {
+   header('location:admin.php');
+   exit;
+}
+
 if(isset($_GET['logout'])){
    unset($user_id);
    session_destroy();
@@ -60,7 +68,6 @@ if(isset($_GET['delete_all'])){
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>shopping cart</title>
 
-   <!-- custom css file link  -->
    <link rel="stylesheet" href="css/style.css">
 
 </head>
@@ -175,7 +182,7 @@ if(isset($message)){
    </table>
 
    <div class="cart-btn">  
-      <a href="#" class="btn <?php echo ($grand_total > 1)?'':'disabled'; ?>">proceed to checkout</a>
+      <a href="checkout.php" class="btn <?php echo ($grand_total > 1)?'':'disabled'; ?>">proceed to checkout</a>
    </div>
 
 </div>
