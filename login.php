@@ -18,7 +18,7 @@ if(isset($_POST['submit'])){
          $message[] = 'Incorrect password!';
       }
    } else {
-      $message[] = 'Incorrect email!';
+      $message[] = 'Email does not exist!';
    }
 }
 
